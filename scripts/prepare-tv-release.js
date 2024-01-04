@@ -25,7 +25,10 @@ const fs_extra = require('fs-extra');
 const os = require('os');
 const path = require('path');
 
-const {generateAndroidArtifacts} = require('./release-utils');
+const {
+  generateAndroidArtifacts,
+  publishAndroidArtifactsToMaven,
+} = require('./release-utils');
 
 let extraHermesDirectoryPath;
 

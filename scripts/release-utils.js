@@ -58,12 +58,12 @@ function generateAndroidArtifacts(releaseVersion, tmpPublishingFolder) {
     if (
       !test(
         '-e',
-        `/tmp/maven-local/io/github/react-native-tvos/react-android/${releaseVersion}/${name}`,
+        `/tmp/maven-local/tools/bricks/react-native-tvos/react-android/${releaseVersion}/${name}`,
       )
     ) {
       echo(
         `Failing as expected file: \n\
-      /tmp/maven-local/io/github/react-native-tvos/react-android/${releaseVersion}/${name}\n\
+      /tmp/maven-local/tools/bricks/react-native-tvos/react-android/${releaseVersion}/${name}\n\
       was not correctly generated.`,
       );
       exit(1);
