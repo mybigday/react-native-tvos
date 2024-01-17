@@ -61,23 +61,22 @@ import java.util.List;
     List<JavaOnlyMap> transforms = new ArrayList<>(mTransformConfigs.size());
 
     for (TransformConfig transformConfig : mTransformConfigs) {
-      double value;
       if (transformConfig instanceof AnimatedTransformConfig) {
         int nodeTag = ((AnimatedTransformConfig) transformConfig).mNodeTag;
         AnimatedNode node = mNativeAnimatedNodesManager.getNodeById(nodeTag);
         if (node == null) {
-          throw new IllegalArgumentException("Mapped style node does not exists");
+          // throw new IllegalArgumentException("Mapped style node does not exists");
         } else if (node instanceof ValueAnimatedNode) {
-          value = ((ValueAnimatedNode) node).getValue();
+          double value = ((ValueAnimatedNode) node).getValue();
+          transforms.add(JavaOnlyMap.of(transformConfig.mProperty, value));
         } else {
           throw new IllegalArgumentException(
               "Unsupported type of node used as a transform child " + "node " + node.getClass());
         }
       } else {
-        value = ((StaticTransformConfig) transformConfig).mValue;
+        double value = ((StaticTransformConfig) transformConfig).mValue;
+        transforms.add(JavaOnlyMap.of(transformConfig.mProperty, value));
       }
-
-      transforms.add(JavaOnlyMap.of(transformConfig.mProperty, value));
     }
 
     propsMap.putArray("transform", JavaOnlyArray.from(transforms));
